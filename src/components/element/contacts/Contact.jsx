@@ -27,9 +27,9 @@ export default function Contact(props) {
       <td>{phone}</td>
       <td>{email}</td>
       <td className="Actions">
-        <a href={`/edit/${id}`}>
+        <Link to={`/edit/${id}`}>
           <span className="material-icons mr-5 ">edit</span>
-        </a>
+        </Link>
 
         <span
           className="material-icons text-danger"

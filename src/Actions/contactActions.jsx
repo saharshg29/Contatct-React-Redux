@@ -8,10 +8,13 @@ import {
   DELETE_SELECTED_CONTACTS,
 } from "../constants";
 
-export const addContact = (contact) => ({
-  type: CREATE_CONTACT,
-  paylaod: contact,
-});
+export const addContact = (contact) => (
+  console.log("addContactAction", contact),
+  {
+    type: CREATE_CONTACT,
+    paylaod: contact,
+  }
+);
 
 // get a contact
 
@@ -22,23 +25,26 @@ export const getContactc = (id) => ({
 
 // UPDAATE A CONTACT
 
-export const upddateContact = (contact) => ({
-  type: UPDATE_CONTACT,
-  payload: contact,
-});
+export const upddateContact = (contact) => (
+  console.log("payload ",contact),
+  {
+    type: UPDATE_CONTACT,
+    paylaod: contact,
+  }
+);
 
 // DELETE A CONTACT
 
 export const deleteContact = (id) => ({
   type: DELETE_CONTACT,
-  payload: id,
+  paylaod: id,
 });
 
 // select all contacts
 
 export const selectAllContact = (id) => ({
   type: SELECT_CONTACT,
-  payload: id,
+  paylaod: id,
 });
 
 // clear selection

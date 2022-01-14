@@ -11,9 +11,9 @@ import {
 export default function Contacts() {
   const [selectAll, setselectAll] = useState(false);
   const dispatch = useDispatch();
-  const contacts = useSelector((state) => state.contact.contacts);
+  const contacts = useSelector((state) => state.contacts.contacts);
   const selectedContacts = useSelector(
-    (state) => state.contact.selectedContacts
+    (state) => state.contacts.selectedContacts
   );
 
   useEffect(() => {
@@ -61,10 +61,10 @@ export default function Contacts() {
           </tr>
         </thead>
         <tbody>
-          {contacts.contacts.map((contact) => (
+          {contacts.map((contact) => (
             <Contact
               contact={contact}
-              keky={contact.id}
+              // key={contact.id}
               selectAll={selectAll}
             />
           ))}

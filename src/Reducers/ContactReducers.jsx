@@ -245,18 +245,22 @@ const initialState = {
   selectedContacts: []
 };
 
-export const contactReducer = (state, action) => {
-  state = initialState;
+export const contactReducer = (state=initialState, action) => {
+  
   switch (action.type) {
     case CREATE_CONTACT:
-      return {
-        ...state,
-        contacts: [action.payload, ...state.contacts],
-      };
+      {
+        console.log("addReducer",action.paylaod)
+        return {
+          ...state,
+          contacts: [action.paylaod, ...state.contacts],
+        };
+      }
+      
 
     case GET_CONTACT:
       let arr = state.contacts.filter(
-        (contact) => contact.id == action.payload
+        (contact) => contact.id == action.paylaod
       );
       arr = arr.values();
       for (let val of arr) {
@@ -267,19 +271,22 @@ export const contactReducer = (state, action) => {
         contact: arr,
       };
 
-    case UPDATE_CONTACT:
+    case UPDATE_CONTACT:{
+      console.log(action.paylaod.contact)
       return {
         ...state,
         contacts: state.contacts.map((contact) =>
-          contact.id == action.payload.id ? action.payload : contact
+          contact.id == action.paylaod.id ? action.paylaod : contact
         ),
       };
 
+    }
+      
     case DELETE_CONTACT:
       return {
         ...state,
         contacts: state.contacts.filter(
-          (contact) => contact.id != action.payload
+          (contact) => contact.id != action.paylaod
         ),
       };
 
@@ -291,7 +298,7 @@ export const contactReducer = (state, action) => {
       case SELECT_CONTACT:
         return {
           ...state,
-          selectedContacts: [...action.payload]
+          selectedContacts: [...action.paylaod]
         }
 
         case CLEAR_CONTACT: 

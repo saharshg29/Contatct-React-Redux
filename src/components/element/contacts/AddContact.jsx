@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addContact } from "../../../Actions/contactActions";
 import { useNavigate } from "react-router-dom";
+import shortid from "shortid";
+
 
 export default function AddContact() {
   let history = useNavigate();
@@ -17,12 +19,13 @@ export default function AddContact() {
       name: Name,
       email: Email,
       phone: Phone,
+      id: shortid.generate()
     };
     dispatch(addContact(newContact));
     history("/list ");
   };
 
-  console.log("add contacts rendered");
+
 
   return (
     <>

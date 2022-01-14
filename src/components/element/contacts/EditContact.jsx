@@ -9,12 +9,10 @@ export default function EditContact() {
   let { id } = useParams();
   let history = useNavigate();
   const dispatch = useDispatch();
-  const contact = useSelector((state) => state.contact.contact);
+  const contact = useSelector((state) => state.contacts.contact);
   const [Name, setName] = useState("");
   const [Email, setEmail] = useState("");
   const [Phone, setPhone] = useState("");
-
-  console.log("edit contacts rendered");
 
   useEffect(() => {
     if (contact != null) {
@@ -34,9 +32,8 @@ export default function EditContact() {
       email: Email,
     });
 
-    dispatch(upddateContact(update_contact))
-    history('/list')
-    console.log(update_contact);
+    dispatch(upddateContact(update_contact));
+    history("/list");
   };
 
   return (
@@ -74,14 +71,8 @@ export default function EditContact() {
             />
           </div>
 
-          <button
-            className="btn btn-primary"
-            type="submit"
-            onClick={() => {
-              console.log("form submitter");
-            }}
-          >
-            Create a Contact
+          <button className="btn btn-primary" type="submit">
+            Update
           </button>
         </div>
       </form>
