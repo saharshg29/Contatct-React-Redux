@@ -23,8 +23,8 @@ export default function Contacts() {
           </tr>
         </thead>
         <tbody>
-          {contacts.map((contact) => (
-            <Contact contact={contact} key={contact.id} />
+          {contacts.contacts.map((contact) => (
+            <Contact contact={contact} />
           ))}
         </tbody>
       </table>

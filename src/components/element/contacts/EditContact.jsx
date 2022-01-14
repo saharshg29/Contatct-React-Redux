@@ -1,35 +1,50 @@
 import React from "react";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addContact } from "../../../Actions/contactActions";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getContactc, upddateContact } from "../../../Actions/contactActions";
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-export default function AddContact() {
+export default function EditContact() {
+  let { id } = useParams();
   let history = useNavigate();
   const dispatch = useDispatch();
+  const contact = useSelector((state) => state.contact.contact);
   const [Name, setName] = useState("");
   const [Email, setEmail] = useState("");
   const [Phone, setPhone] = useState("");
 
-  const createContact = (e) => {
-    e.preventDefault();
-    const newContact = {
-      name: Name,
-      email: Email,
-      phone: Phone,
-    };
-    dispatch(addContact(newContact));
-    history("/list ");
-  };
+  console.log("edit contacts rendered");
 
-  console.log("add contacts rendered");
+  useEffect(() => {
+    if (contact != null) {
+      setName(contact.name);
+      setPhone(contact.phone);
+      setEmail(contact.email);
+    }
+    dispatch(getContactc(id));
+  }, [contact]);
+
+  const onUpdateContact = (e) => {
+    e.preventDefault();
+
+    const update_contact = Object.assign(contact, {
+      name: Name,
+      phone: Phone,
+      email: Email,
+    });
+
+    dispatch(upddateContact(update_contact))
+    history('/list')
+    console.log(update_contact);
+  };
 
   return (
     <>
       <div className="shadow">
-        <h1>add a contact</h1>
+        <h1>Edit</h1>
       </div>
-      <form onSubmit={(e) => createContact(e)}>
+      <form onSubmit={(e) => onUpdateContact(e)}>
         <div className="card">
           <div className="form-group">
             <input
@@ -62,6 +77,9 @@ export default function AddContact() {
           <button
             className="btn btn-primary"
             type="submit"
+            onClick={() => {
+              console.log("form submitter");
+            }}
           >
             Create a Contact
           </button>
